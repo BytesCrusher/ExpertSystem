@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/AndroidStudioProjects/ExpertSystem/app/src/main/res/layout/activity_main.xml" value="0.39603960396039606" />
+        <entry key="..\:/AndroidStudioProjects/ExpertSystem/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/ExpertSystem/app/src/main/res/layout/item_demand_element.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/ExpertSystem/app/src/main/res/menu/period.xml" value="0.2708333333333333" />
       </map>
     </option>
   </component>
