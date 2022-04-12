@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/ExpertSystem/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2755" />
         <entry key="..\:/AndroidStudioProjects/ExpertSystem/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/AndroidStudioProjects/ExpertSystem/app/src/main/res/layout/item_demand_element.xml" value="0.33" />
         <entry key="..\:/AndroidStudioProjects/ExpertSystem/app/src/main/res/menu/period.xml" value="0.2708333333333333" />
+        <entry key="..\:/AndroidStudioProjects/ExpertSystem/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2755" />
       </map>
     </option>
   </component>
