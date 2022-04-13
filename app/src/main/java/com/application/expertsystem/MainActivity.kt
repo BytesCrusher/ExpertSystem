@@ -230,7 +230,7 @@ class MainActivity : AppCompatActivity() {
         mandatoryExpenses += binding.etTransport.text.toString().toInt()
         mandatoryExpenses += familyDemandByLivingWage
 
-        familyExpensesCount = mandatoryExpenses + insuranceCost
+        familyExpensesCount = mandatoryExpenses + (insuranceCost/12)
         addTextToMainTextView("\nЕжемесячные траты вашей семьи: ${familyExpensesCount}")
 
         addTextToMainTextView("\nЕжемесячные обязательные расходы: ${mandatoryExpenses}")
@@ -396,10 +396,10 @@ class MainActivity : AppCompatActivity() {
             savings = 0
 
         } else {
+            main = 100-percent
             optional = percent * optional/100
             savings = percent * savings/100
         }
-
 
         addTextToMainTextView(
             "\n\n" +
