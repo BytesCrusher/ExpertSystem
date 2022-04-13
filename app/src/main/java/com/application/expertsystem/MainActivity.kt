@@ -3,7 +3,10 @@ package com.application.expertsystem
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.application.expertsystem.databinding.ActivityMainBinding
 import com.google.android.material.textfield.TextInputEditText
@@ -12,43 +15,41 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     val regionList = listOf<Region>(
-        Region("Адыгея",10882),
-        Region("Алтай",11895),
-        Region("Алтайский край",11262),
-        Region("Амурская обл.",14704),
-        Region("Архангельская обл.",14679),
-        Region("Астраханская обл.",12274),
-        Region("Башкортостан",11009),
-        Region("Белгородская обл.",10629),
-        Region("Брянская обл.",11934),
-        Region("Бурятия",13793),
-        Region("Владимирская обл.",12274),
-        Region("Волгоградская обл.",10882),
-        Region("Вологодская обл.",12781),
-        Region("Воронежская обл.",10756),
-        Region("Дагестан",11515),
-        Region("Еврейская АО",17053),
-        Region("Забайкальский край",14805),
-        Region("Ивановская обл.",11642),
-        Region("Ингушетия",11895),
-        Region("Иркутская обл.",13413),
-        Region("Кабардино-Балкария",12890),
-        Region("Калининградская обл.",13034),
-        Region("Калмыкия",11768),
-        Region("Калужская обл.",12148),
-        Region("Камчатский край",22930),
-        Region("Карачаево-Черкесия",11515),
-        Region("Карелия",15104),
-        Region("Кемеровская обл.",11515),
-        Region("Кировская обл.",11262),
-        Region("Коми",15368)
+        Region(0, "Адыгея",10882),
+        Region(1, "Алтай",11895),
+        Region(2,"Алтайский край",11262),
+        Region(3,"Амурская обл.",14704),
+        Region(4, "Архангельская обл.",14679),
+        Region(5, "Астраханская обл.",12274),
+        Region(6, "Башкортостан",11009),
+        Region(7, "Белгородская обл.",10629),
+        Region(8, "Брянская обл.",11934),
+        Region(9, "Бурятия",13793),
+        Region(10, "Владимирская обл.",12274),
+        Region(11, "Волгоградская обл.",10882),
+        Region(12, "Вологодская обл.",12781),
+        Region(13, "Воронежская обл.",10756),
+        Region(14, "Дагестан",11515),
+        Region(15, "Еврейская АО",17053),
+        Region(16, "Забайкальский край",14805),
+        Region(17, "Ивановская обл.",11642),
+        Region(18, "Ингушетия",11895),
+        Region(19, "Иркутская обл.",13413),
+        Region(20, "Кабардино-Балкария",12890),
+        Region(21, "Калининградская обл.",13034),
+        Region(22, "Калмыкия",11768),
+        Region(23, "Калужская обл.",12148),
+        Region(24, "Камчатский край",22930),
+        Region(25, "Карачаево-Черкесия",11515),
+        Region(26, "Карелия",15104),
+        Region(27, "Кемеровская обл.",11515),
+        Region(28, "Кировская обл.",11262),
+        Region(29, "Коми",15368)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-
-        /*binding.tvMainText.text = "[${binding.etOldCount.text}]"*/
 
         var parentDemandList = mutableMapOf<Int, View>()
         var parentDemand = mutableMapOf<Int, Int?>()
@@ -56,7 +57,6 @@ class MainActivity : AppCompatActivity() {
         binding.etOldCount.addTextChangedListener {
             binding.llDemandCountContainer.removeAllViews()
             parentDemandList = mutableMapOf<Int, View>()//обнуление мапы с зарплатами родителей
-            binding.tvMainText.text = ""//обнуление вьюшки с текстом
 
             val count = binding.etOldCount.text.toString()
             if (count != "") {
@@ -80,7 +80,6 @@ class MainActivity : AppCompatActivity() {
                             this.binding.llDemandCountContainer.addView(newParent)
                         }
                     }
-                    /*binding.tvMainText.text = "${parentDemandList.count()}"*///"[${binding.etOldCount.text}]"
 
                     //обработка ввода зарплаты родителей
                     parentDemand = mutableMapOf<Int, Int?>()
@@ -89,21 +88,61 @@ class MainActivity : AppCompatActivity() {
                         parentDemandCertainItem.addTextChangedListener{
                             var parentDemandCount = parentDemandCertainItem.text.toString()
                             parentDemand.put(key, parentDemandCount.toIntOrNull())
-                            binding.tvMainText.text = binding.tvMainText.text.toString() + "\nвзрослый ${key} получает ${parentDemand[key]}"
-
                         }
-                        //id Всех элементов отобразить
-                        /*binding.tvMainText.text = binding.tvMainText.text.toString() + value.id*/
                     }
-
-                    /*binding.tvMainText.text. = "${parentDemandList.forEach{(key, value) ->
-                        key
-
-                    }}"*/
                 }
             }
         }
 
+        //адаптер для выбора региона
+        val regions = mutableListOf<String>()
+        regionList.forEach { regions.add(it.regionName) }
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, regions)
+        binding.etRegion.setAdapter(adapter)
+        // Минимальное число символов для показа выпадающего списка
+        binding.etRegion.threshold = 1
+        // Обработчик щелчка
+        binding.etRegion.onItemClickListener = AdapterView.OnItemClickListener { parent, _,
+                                                                                 position, id ->
+            val selectedRegion = parent.getItemAtPosition(position).toString()
+            // Выводим выбранное слово
+            Toast.makeText(applicationContext, "Выбран регион: $selectedRegion", Toast.LENGTH_SHORT).show()
+        }
+
+        //адаптер для проблем со здоровьем
+        val yesNoList = listOf<String>("Да", "Нет")
+        val healthAdapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, yesNoList)
+        binding.etHealthProblems.setAdapter(healthAdapter)
+
+        //адаптер для страховки
+        val insuranceAdapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, yesNoList)
+        binding.etInsurance.setAdapter(insuranceAdapter)
+        binding.etInsurance.onItemClickListener = AdapterView.OnItemClickListener { parent, _,
+                                                                                    position, id ->
+            binding.llInsuranceContainer.removeAllViews()
+            val selectedItem = parent.getItemAtPosition(position).toString()
+
+            if (selectedItem == "Да"){
+                val insuranceCostItem = layoutInflater.inflate(
+                    R.layout.item_insurance_cost,
+                    this.binding.llDemandCountContainer,
+                    false
+                )
+                insuranceCostItem.apply {
+                    /*val parentNumber = this.findViewById<TextView>(R.id.tv_parent)
+                    parentNumber.text = "Взрослый ${i}"*/
+                }
+                this.binding.llInsuranceContainer.addView(insuranceCostItem)
+            }
+            // Выводим выбранное слово
+            Toast.makeText(applicationContext, "Страховка: $selectedItem", Toast.LENGTH_SHORT).show()
+        }
+
+        //адаптер для детей
+        val babyAdapter = ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, yesNoList)
+        binding.etBabyPlan.setAdapter(babyAdapter)
+
+        //листнер на кнопку начала расчетов
         binding.bCalculation.setOnClickListener {
             binding.tvMainText.text = "Параметры вашей семьи:"
             addTextToMainTextView("\nФамилия вашей семьи: ${binding.etFamilyName.text.toString()}")
@@ -130,7 +169,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    //функция добавления текста в главный лейбл чтобы выводить результат
     fun addTextToMainTextView(addableTextString: String){
         binding.tvMainText.text = binding.tvMainText.text.toString() + "\n" + addableTextString
+    }
+
+    //функция проведения расчета
+    fun calculate(){
+
     }
 }

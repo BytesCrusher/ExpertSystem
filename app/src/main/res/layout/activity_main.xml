@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="Добро пожаловать в экспертную систему расчета бюджета семьи! Заполните все поля, чтобы система сформировала рекомендации по вашему семейному бюджету." />
+                android:text="Добро пожаловать в экспертную систему расчета бюджета семьи! Заполните все поля, чтобы система сформировала рекомендации по вашему семейному бюджету. Система строит бюджет на год. Указывайте траты и доходы за месяц." />
 
             <LinearLayout
                 android:id="@+id/ll_mainContentContainer"
@@ -63,7 +63,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/et_region"
                         style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
                         android:layout_width="match_parent"
@@ -228,51 +228,61 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/et_healthProblems"
                         style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Проблемы со здоровьем"
-                        app:counterMaxLength="140" />
+                        app:counterMaxLength="4"
+                        android:inputType="none"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/et_insurance"
                         style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Имеется ли у семьи страховка?"
-                        app:counterMaxLength="140" />
+                        app:counterMaxLength="4"
+                        android:inputType="none"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <com.google.android.material.circularreveal.CircularRevealLinearLayout
+                    android:id="@+id/ll_insuranceContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/et_babyPlan"
                         style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Планируется ли рождение ребенка?"
-                        app:counterMaxLength="140" />
+                        app:counterMaxLength="140"
+                        android:inputType="none"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
