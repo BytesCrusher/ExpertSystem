@@ -387,19 +387,7 @@ class MainActivity : AppCompatActivity() {
             savings += 10
         }
 
-        //заключение по бюджету
-        var percent = (familyDemandCount - familyExpensesCount) / familyDemandCount * 100
-        var different = 0
-        if (percent < 0) {
-            main = 100
-            optional = 0
-            savings = 0
-
-        } else {
-            main = 100-percent
-            optional = percent * optional/100
-            savings = percent * savings/100
-        }
+        main = 100 - optional - savings
 
         addTextToMainTextView(
             "\n\n" +
